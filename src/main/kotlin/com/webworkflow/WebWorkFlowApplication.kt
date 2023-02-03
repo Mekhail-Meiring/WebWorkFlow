@@ -1,4 +1,4 @@
-package com.WebWorkFlow.WebWorkFlow
+package com.webworkflow
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

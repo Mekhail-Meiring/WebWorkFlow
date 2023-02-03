@@ -1,4 +1,4 @@
-package com.WebWorkFlow.WebWorkFlow
+package com.webworkflow
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
