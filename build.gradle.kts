@@ -1,4 +1,3 @@
-import com.github.gradle.node.task.NodeTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -32,51 +31,42 @@ dependencies {
 node {
 	download.set(true)
 	version.set("16.13.0")
-	yarnVersion.set("1.27.17")
 }
 
 
-tasks{
+tasks {
 
 	withType<Test> {
 		useJUnitPlatform()
 	}
 
-	val install = create<NodeTask> ("install dependencies") {
-		workingDir.set(file("${project.projectDir}/src/main/frontend"))
-		args.set(listOf("install"))
+	register("buildFrontend") {
+		dependsOn("nodeSetup")
+		doLast {
+			exec {
+				commandLine("npm", "run", "build")
+				workingDir("${project.projectDir}/src/main/frontend")
+			}
+		}
 	}
 
-	val build = create<NodeTask> ("build frontend") {
-		dependsOn(install)
-		workingDir.set(file("${project.projectDir}/src/main/frontend"))
-		args.set(listOf("build"))
-	}
-
-	val copy = create<Copy> ("copy frontend") {
-		dependsOn(build)
-		from(file("${project.projectDir}/src/main/frontend/build"))
-		into(file("${rootDir}/build/resources/main/static/."))
-//		into(file("${project.projectDir}/src/main/resources/static"))
-	}
-
-	val cleanup = create<Delete> ("cleanup frontend") {
-		delete(file("${project.projectDir}/src/main/frontend/build"))
+	register("copyFrontendBuild") {
+		dependsOn("buildFrontend")
+		doLast {
+			copy {
+				from("${project.projectDir}/src/main/frontend/build")
+				into("${project.projectDir}/src/main/resources/static")
+			}
+		}
 	}
 
 	withType<KotlinCompile> {
-		dependsOn(copy)
+		dependsOn("copyFrontendBuild")
 		kotlinOptions {
 			freeCompilerArgs = listOf("-Xjsr305=strict")
 			jvmTarget = "17"
 		}
 	}
-
-	clean {
-		dependsOn(cleanup)
-	}
-
-
 
 }
 
