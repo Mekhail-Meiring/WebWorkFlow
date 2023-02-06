@@ -4,7 +4,12 @@ import '../styles/homePage.css'
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import {useHistory} from "react-router-dom";
 
-
+/**
+ * Home component is the main page of the app. It displays the file upload form and
+ * handles the file upload process.
+ *
+ * @returns {JSX.Element} A react component that represents the home page of the app.
+ */
 const Home = () => {
 
     const history = useHistory();
@@ -13,6 +18,11 @@ const Home = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [firstName] = useState(sessionStorage.getItem("firstName"));
 
+    /**
+     * Handles the file upload process and makes a POST request to the server.
+     *
+     * @param {object} event - A synthetic event object that represents the file input change event.
+     */
     const uploadFile = (event) => {
         const data = new FormData();
         data.append('file', event.target.files[0]);
@@ -23,7 +33,7 @@ const Home = () => {
             body: data
         }
 
-        fetch('http://localhost:8080/api/upload', requestOptions)
+        fetch('/api/upload', requestOptions)
             .then((response) => {
 
                 switch (response.status) {
@@ -47,6 +57,9 @@ const Home = () => {
             });
     }
 
+    /**
+     * Redirects the user to the graph page if the file upload is successful.
+     */
     useEffect(() => {
         if (isSuccessful) {
             history.push('/graph');

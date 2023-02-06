@@ -21,6 +21,9 @@ ChartJS.register(
     Legend
 );
 
+/**
+ * Graph component that displays a bar graph of the user's monthly income and expenses
+ */
 const Graph = () => {
 
     const [firstName] = useState(sessionStorage.getItem("firstName"));
@@ -31,6 +34,10 @@ const Graph = () => {
 
     const history = useHistory();
 
+    /**
+     * Function to update the graph data
+     * @param {Array} newData - The new data for the graph
+     */
     const updateGraph = (newData) => {
 
         console.log(newData);
@@ -46,18 +53,26 @@ const Graph = () => {
         console.log(newIncome);
     }
 
+    /**
+     * Function to handle the uploading of a new file
+     */
     const uploadNewFileHandler = () => {
         setUploadNewFile(true);
     }
 
 
+
     useEffect(() => {
-        // Get the latest data
+
+        /**
+         * Function to fetch the latest data for the graph
+         */
         const fetchData = async () => {
-            const response = await fetch(`http://localhost:8080/api/monthlyIncomeAndExpense/${firstName}`);
+            const response = await fetch(`/api/monthlyIncomeAndExpense/${firstName}`);
             const data = await response.json();
             updateGraph(data);
         };
+
         fetchData().then(r => console.log(r));
 
         if (uploadNewFile) {
@@ -67,6 +82,11 @@ const Graph = () => {
     }, [history, uploadNewFile]);
 
 
+    /**
+     * Function to parse a money string into a float
+     * @param {string} moneyString - The string to parse
+     * @returns {number} - The parsed number
+     */
     function parseMoneyString(moneyString) {
         return parseFloat(moneyString.replace(/[^\d.-]/g, ''));
     }

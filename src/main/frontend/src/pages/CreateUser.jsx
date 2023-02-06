@@ -3,13 +3,23 @@ import {useHistory} from "react-router-dom";
 
 import '../styles/createUserPage.css'
 
-
+/**
+ * A React component that allows the user to create a user by entering their first name,
+ * last name, and date of birth. The entered information is stored in session storage
+ * and sent to the server via a POST request to "/api/addUser".
+ */
 const CreateUser = () => {
 
     const history = useHistory();
     const [isSuccessful, setIsSuccessful] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
 
+    /**
+     * Handles the submission of the create user form. Sends a POST request to the server
+     * with the entered user information.
+     *
+     * @param {Object} event - The submit event of the form.
+     */
     const onSubmit = (event) => {
 
         event.preventDefault();
@@ -35,7 +45,7 @@ const CreateUser = () => {
             })
         }
 
-        fetch("http://localhost:8080/api/addUser", options).then(response => {
+        fetch("/api/addUser", options).then(response => {
 
             if (response.ok) {return response.json();}
             if (response.status === 400) {throw new Error("Invalid user credentials");}
