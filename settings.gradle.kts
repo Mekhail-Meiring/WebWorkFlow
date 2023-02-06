@@ -1,1 +1,1 @@
-rootProject.name = "WebWorkFlow"
+rootProject.name = "webworkflow"
