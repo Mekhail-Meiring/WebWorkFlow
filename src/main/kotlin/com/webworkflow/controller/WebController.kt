@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 import java.io.File
+import java.lang.IllegalStateException
 
 /**
  * WebController is a RESTful web service that provides APIs for adding a user, uploading a file,
@@ -62,6 +63,10 @@ class WebController(private val service: WebService){
     fun handleBadRequest(e: IllegalArgumentException): ResponseEntity<String> =
         ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
 
+    @ExceptionHandler(IllegalStateException::class)
+    fun handleIllegalState(e: IllegalStateException): ResponseEntity<String> =
+        ResponseEntity(e.message, HttpStatus.FORBIDDEN)
+
 
     /**
      * Adds a user by calling the addUser method of the WebService class.
@@ -84,9 +89,10 @@ class WebController(private val service: WebService){
      */
     @PostMapping("upload")
     @ResponseStatus(HttpStatus.CREATED)
-    fun upload(@RequestParam("file") file: MultipartFile, @RequestParam("username") username: String) {
+    fun upload(@RequestParam("file") file: MultipartFile, @RequestParam("username") username: String) : String {
         val tempFile = transformFile(file)
         service.uploadExcelFile(tempFile, username)
+        return "File uploaded successfully"
     }
 
 
