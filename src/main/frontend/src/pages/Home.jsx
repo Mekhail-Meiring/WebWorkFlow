@@ -1,18 +1,58 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../styles/homePage.css'
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import {useHistory} from "react-router-dom";
+
 
 const Home = () => {
 
+    const history = useHistory();
+    const [displayInformation, setDisplayInformation] = useState(false);
+    const [isSuccessful, setIsSuccessful] = useState(null);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [firstName] = useState(sessionStorage.getItem("firstName"));
+
     const uploadFile = (event) => {
+        const data = new FormData();
+        data.append('file', event.target.files[0]);
+        data.append('username', firstName)
 
-        const data = new FormData(event.target)
-        data.get("file")
+        const requestOptions = {
+            method: 'POST',
+            body: data
+        }
 
+        fetch('http://localhost:8080/api/upload', requestOptions)
+            .then((response) => {
+
+                switch (response.status) {
+                    case 403:
+                        setDisplayInformation(true);
+                        throw new Error("The .xlsx file is not correctly formatted.");
+                    case 404:
+                        throw new Error(`User ${firstName} not found`);
+                    case 400:
+                        throw new Error(`Unsupported file type`);
+                    case 500:
+                        throw new Error(`Server error`);
+                }
+            })
+            .then(() => {
+                setIsSuccessful(true);
+            })
+            .catch((error) => {
+                setIsSuccessful(false);
+                setErrorMessage(error.message);
+            });
     }
 
-    const [firstName, setFirstName] = useState(sessionStorage.getItem("firstName"));
+    useEffect(() => {
+        if (isSuccessful) {
+            history.push('/graph');
+        }
+
+    }, [isSuccessful, history]);
 
     return (
         <>
@@ -33,8 +73,15 @@ const Home = () => {
 
                     <p className="main">Supported file types:</p>
                     <p className="info">Excel (.xlsx)</p>
-                </div>
 
+                    {errorMessage !== "" && <div className="error-message">{errorMessage}</div>}
+                    {displayInformation === true &&
+                        <div className='example-image'>
+                            <p className="image-description">Example of Excel file:</p>
+                            <img className='info-img' src={process.env.PUBLIC_URL + '/Excel.png'} alt="example of excel"/>
+                        </div>
+                    }
+                </div>
             </div>
 
         </>
