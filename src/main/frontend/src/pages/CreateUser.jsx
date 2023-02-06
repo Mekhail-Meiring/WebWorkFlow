@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useHistory} from "react-router-dom";
 
-import '../styles/loginPage.css'
+import '../styles/createUserPage.css'
 
 
 const CreateUser = () => {
