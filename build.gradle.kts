@@ -61,7 +61,6 @@ tasks {
 	}
 
 	withType<KotlinCompile> {
-		dependsOn("copyFrontendBuild")
 		kotlinOptions {
 			freeCompilerArgs = listOf("-Xjsr305=strict")
 			jvmTarget = "17"
