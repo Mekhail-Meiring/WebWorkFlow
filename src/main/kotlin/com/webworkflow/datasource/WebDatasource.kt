@@ -48,7 +48,7 @@ class WebDatasource : Datasource{
         if (checkIfUserDetailsAreIncorrect(user)) {
             throw IllegalArgumentException("User details are invalid")
         }
-
+        userIncomeAndExpense.clear()
         userIncomeAndExpense[user.firstName] = emptyList()
         return user
     }
@@ -70,6 +70,7 @@ class WebDatasource : Datasource{
         val workbook = XSSFWorkbook(FileInputStream(file))
         val sheet = workbook.getSheetAt(0)
         val userData = userIncomeAndExpense.getValue(userFirstName).toMutableList()
+        userData.clear()
 
         // Loops through each row in the sheet and maps it to a MonthlyIncomeAndExpense object
         for (i in 1 until sheet.physicalNumberOfRows) {

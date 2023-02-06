@@ -1,8 +1,14 @@
 # Default ignored files
 /shelf/
 /.idea/
+/.vscode
+/.gradle/
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+/bin/
+build/
+src/main/frontend/node_modules/
+sr/main/frontend/build/
