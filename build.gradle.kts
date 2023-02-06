@@ -31,8 +31,11 @@ dependencies {
 node {
 	download.set(true)
 	version.set("16.13.0")
+	exec {
+		commandLine("npm", "install")
+		workingDir("${project.projectDir}/src/main/frontend")
+	}
 }
-
 
 tasks {
 
@@ -65,6 +68,10 @@ tasks {
 			freeCompilerArgs = listOf("-Xjsr305=strict")
 			jvmTarget = "17"
 		}
+	}
+
+	bootJar {
+		dependsOn("copyFrontendBuild")
 	}
 
 }
