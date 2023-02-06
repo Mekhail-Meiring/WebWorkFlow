@@ -28,6 +28,8 @@ internal class WebControllerTest @Autowired constructor(
     val objectMapper: ObjectMapper
 ) {
 
+    private val baseApiUrl = "/api"
+
     @Nested
     @DisplayName("Post /addUser")
     @TestInstance(Lifecycle.PER_CLASS)
@@ -38,7 +40,7 @@ internal class WebControllerTest @Autowired constructor(
             val user = User("John", "Doe", "01/01/2000")
 
             // When
-            val performPost = mockMvc.post("/addUser") {
+            val performPost = mockMvc.post("$baseApiUrl/addUser") {
                 contentType = MediaType.APPLICATION_JSON
                 content = objectMapper.writeValueAsString(user)
             }
@@ -59,7 +61,7 @@ internal class WebControllerTest @Autowired constructor(
             val invalidUser = User("123", "", "")
 
             // When
-            val performPost = mockMvc.post("/addUser") {
+            val performPost = mockMvc.post("$baseApiUrl/addUser") {
                 contentType = MediaType.APPLICATION_JSON
                 content = objectMapper.writeValueAsString(invalidUser)
             }
@@ -83,7 +85,7 @@ internal class WebControllerTest @Autowired constructor(
         @Test
         fun `Given that there is a user in the database` () {
             // When/ Then
-            mockMvc.post("/addUser") {
+            mockMvc.post("$baseApiUrl/addUser") {
                 contentType = MediaType.APPLICATION_JSON
                 content = objectMapper.writeValueAsString(User("John", "Doe", "01/01/2000"))
             }
@@ -104,7 +106,7 @@ internal class WebControllerTest @Autowired constructor(
 
             // When
             val performPost = mockMvc.perform(
-                MockMvcRequestBuilders.multipart("/upload")
+                MockMvcRequestBuilders.multipart("$baseApiUrl/upload")
                     .file(multipartFile)
                     .param("username", "John")
             )
@@ -117,7 +119,7 @@ internal class WebControllerTest @Autowired constructor(
         fun `Then we should be able to get the monthly income and expenses` () {
 
             // When
-            val performGet = mockMvc.get("/monthlyIncomeAndExpense/John")
+            val performGet = mockMvc.get("$baseApiUrl/monthlyIncomeAndExpense/John")
 
             // Then
             performGet
@@ -137,7 +139,7 @@ internal class WebControllerTest @Autowired constructor(
 
             // When
             val performPost = mockMvc.perform(
-                MockMvcRequestBuilders.multipart("/upload")
+                MockMvcRequestBuilders.multipart("$baseApiUrl/upload")
                     .file(multipartFile)
                     .param("username", "Jack") // Jack does not exist in the database
             )

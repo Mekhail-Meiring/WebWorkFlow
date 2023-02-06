@@ -35,7 +35,7 @@ import java.io.File
  * @RequestParam specifies a request parameter.
  */
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 class WebController(private val service: WebService){
 
     /**
@@ -82,12 +82,13 @@ class WebController(private val service: WebService){
      *
      * @param username The username associated with the file.
      */
-    @PostMapping("/upload")
+    @PostMapping("upload")
     @ResponseStatus(HttpStatus.CREATED)
     fun upload(@RequestParam("file") file: MultipartFile, @RequestParam("username") username: String) {
         val tempFile = transformFile(file)
         service.uploadExcelFile(tempFile, username)
     }
+
 
     /**
      * Retrieve the list of [MonthlyIncomeAndExpense] for the given username.
@@ -95,10 +96,11 @@ class WebController(private val service: WebService){
      * @param username the username to retrieve data for.
      * @return the list of [MonthlyIncomeAndExpense] for the given username.
      */
-    @GetMapping("/monthlyIncomeAndExpense/{username}")
+    @GetMapping("monthlyIncomeAndExpense/{username}")
     fun getMonthlyIncomeAndExpense(@PathVariable username: String) : List<MonthlyIncomeAndExpense> {
         return service.getMonthlyIncomeAndExpense(username)
     }
+
 
     /**
      * Transforms the given [MultipartFile] into a [File].
