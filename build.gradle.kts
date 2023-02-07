@@ -31,10 +31,6 @@ dependencies {
 node {
 	download.set(true)
 	version.set("16.13.0")
-	exec {
-		commandLine("npm", "install")
-		workingDir("${project.projectDir}/src/main/frontend")
-	}
 }
 
 tasks {
@@ -43,8 +39,15 @@ tasks {
 		useJUnitPlatform()
 	}
 
+	register("installNodePackages"){
+		exec {
+			commandLine("npm", "install")
+			workingDir("${project.projectDir}/src/main/frontend")
+		}
+	}
+
 	register("buildFrontend") {
-		dependsOn("nodeSetup")
+		dependsOn("installNodePackages")
 		doLast {
 			exec {
 				commandLine("npm", "run", "build")
@@ -74,5 +77,10 @@ tasks {
 		dependsOn("copyFrontendBuild")
 	}
 
-}
+	clean {
+		doLast {
+			delete("${project.projectDir}/src/main/frontend/build")
+		}
+	}
 
+}
