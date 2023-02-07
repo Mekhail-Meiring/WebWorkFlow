@@ -23,28 +23,30 @@ presented with a graphical representation of your data.
         - Docker installation
         - Make installation (for Unix-based systems)
 
-      - Github Repository Packages:
-          - Navigate to Github repository packages and pull the latest image of the container.
-          - Run the following command in the terminal:
-              - docker run -p 8080:8080 ghcr.io/mekhail-meiring/webworkflow:latest
+    - Github Repository Packages:
+        - Navigate to Github repository packages and pull the latest image of the container.
+        - Run the following command in the terminal:
+            - docker run -p 8080:8080 ghcr.io/mekhail-meiring/webworkflow:latest
 
-      - For Unix-based systems (such as Linux).
-          - Open the terminal and use the following commands:
-              - make package 
-              - make run
+    - For Unix-based systems (such as Linux).
+        - Open the terminal and use the following commands:
+            - make package 
+            - make run
 
-      - For other systems:
-          - Run the following gradle commands in the terminal:
-              - gradlew clean
-              - gradlew bootBuildImage
-              - docker run -p 8080:8080 docker.io/library/webworkflow:0.0.1-SNAPSHOT
+    - For other systems:
+        - Run the following gradle commands in the terminal:
+            - gradlew clean
+            - gradlew bootBuildImage
+            - docker run -p 8080:8080 docker.io/library/webworkflow:0.0.1-SNAPSHOT
 
-      - Access the application by navigating to http://localhost:8080 in your web browser.
+    - Access the application by navigating to [http://localhost:8080](http://localhost:8080)
+        in your web browser.
     
 
 ## Live Deployment:
-    A live deployment of WebWorkFlow is also available at https://web-workflow-wf5t8.ondigitalocean.app/ for easy access 
-    and demonstration.
+    A live deployment of WebWorkFlow is also available at 
+    [https://web-workflow-wf5t8.ondigitalocean.app/](https://web-workflow-wf5t8.ondigitalocean.app/) 
+    for easy access and demonstration.
 
 ## How to run tests:
     
