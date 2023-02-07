@@ -9,7 +9,7 @@ package: # Package the application
 
 run: ## Run the application
 	@echo "Running..."
-	sudo docker run -p -d 8080:8080 docker.io/library/webworkflow:0.0.1-SNAPSHOT
+	sudo docker run -d -p 8080:8080 docker.io/library/webworkflow:0.0.1-SNAPSHOT
 	@echo "Done."
 
 

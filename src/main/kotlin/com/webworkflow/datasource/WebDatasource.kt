@@ -48,7 +48,6 @@ class WebDatasource : Datasource{
         if (checkIfUserDetailsAreIncorrect(user)) {
             throw IllegalArgumentException("User details are invalid")
         }
-        userIncomeAndExpense.clear()
         userIncomeAndExpense[user.firstName] = emptyList()
         return user
     }
