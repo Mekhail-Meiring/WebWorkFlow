@@ -46,6 +46,8 @@ const Home = () => {
                         throw new Error(`Unsupported file type`);
                     case 500:
                         throw new Error(`Server error`);
+                    default:
+                        return "success";
                 }
             })
             .then(() => {
