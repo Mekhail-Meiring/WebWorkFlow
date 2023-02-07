@@ -13,19 +13,19 @@ jobs:
           java-version: 17
 
       - name: Build and package with Gradle
-          run: make package
+        run: make package
 
       - name: Login to GitHub Container Registry
-          uses: docker/login-action@v1
-          with:
-            registry: ghcr.io
-            username: ${{ github.actor }}
-            password: ${{ secrets.GITHUB_TOKEN }}
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and publish docker container
-          run: |
-            @echo "Publishing..."
-            sudo docker tag com/webworkflow ghcr.io/Mekhail-Meiring/webworkflow:0.0.1-SNAPSHOT
-            sudo docker run ghcr.io/Mekhail-Meiring/webworkflow:0.0.1-SNAPSHOT
-            sudo docker push ghcr.io/Mekhail-Meiring/webworkflow:0.0.1-SNAPSHOT
-            @echo "Done."
+        run: |
+          @echo "Publishing..."
+          sudo docker tag com/webworkflow ghcr.io/Mekhail-Meiring/webworkflow:0.0.1-SNAPSHOT
+          sudo docker run ghcr.io/Mekhail-Meiring/webworkflow:0.0.1-SNAPSHOT
+          sudo docker push ghcr.io/Mekhail-Meiring/webworkflow:0.0.1-SNAPSHOT
+          @echo "Done."
