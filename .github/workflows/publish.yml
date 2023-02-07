@@ -24,6 +24,6 @@ jobs:
 
       - name: Build and publish docker container
         run: |
-          docker tag com/webworkflow ghcr.io/Mekhail-Meiring/webworkflow:0.0.1-SNAPSHOT
-          docker run ghcr.io/Mekhail-Meiring/webworkflow:0.0.1-SNAPSHOT
-          docker push ghcr.io/Mekhail-Meiring/webworkflow:0.0.1-SNAPSHOT
+          docker tag com/webworkflow ghcr.io/mekhail-meiring/webworkflow:latest
+          docker run ghcr.io/mekhail-meiring/webworkflow:latest
+          docker push ghcr.io/mekhail-meiring/webworkflow:latest
