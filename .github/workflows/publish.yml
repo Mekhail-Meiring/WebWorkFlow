@@ -24,8 +24,6 @@ jobs:
 
       - name: Build and publish docker container
         run: |
-          @echo "Publishing..."
-          sudo docker tag com/webworkflow ghcr.io/Mekhail-Meiring/webworkflow:0.0.1-SNAPSHOT
-          sudo docker run ghcr.io/Mekhail-Meiring/webworkflow:0.0.1-SNAPSHOT
-          sudo docker push ghcr.io/Mekhail-Meiring/webworkflow:0.0.1-SNAPSHOT
-          @echo "Done."
+          docker tag com/webworkflow ghcr.io/Mekhail-Meiring/webworkflow:0.0.1-SNAPSHOT
+          docker run ghcr.io/Mekhail-Meiring/webworkflow:0.0.1-SNAPSHOT
+          docker push ghcr.io/Mekhail-Meiring/webworkflow:0.0.1-SNAPSHOT
