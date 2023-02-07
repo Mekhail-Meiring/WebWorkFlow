@@ -7,7 +7,7 @@ clean_build_app: # Cleans and builds the application
 	@echo "Done."
 
 
-build_image: ## Build the docker image
+build_container: ## Build the docker container for the application from dockerfile
 	@echo "Building image..."
 	sudo docker build -t com/webworkflow .
 	@echo "Done."
@@ -15,7 +15,7 @@ build_image: ## Build the docker image
 
 package: ## Packages the project
 	make clean_build_app
-	make build_image
+	make build_container
 
 
 run: ## Run the application
