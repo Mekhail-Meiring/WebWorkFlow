@@ -1,15 +1,26 @@
 
-package: # Package the application
+clean_build_app: # Cleans and builds the application
 	@echo "cleaning..."
 	./gradlew clean
-	@echo "Building docker image..."
-	./gradlew bootBuildImage
+	@echo "Building jar..."
+	./gradlew build
 	@echo "Done."
+
+
+build_image: ## Build the docker image
+	@echo "Building image..."
+	sudo docker build -t com/webworkflow .
+	@echo "Done."
+
+
+package: ## Packages the project
+	make clean_build_app
+	make build_image
 
 
 run: ## Run the application
 	@echo "Running..."
-	sudo docker run -d -p 8080:8080 docker.io/library/webworkflow:0.0.1-SNAPSHOT
+	sudo docker run -d -p 8080:8080 com/webworkflow
 	@echo "Done."
 
 
