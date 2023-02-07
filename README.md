@@ -23,18 +23,23 @@ presented with a graphical representation of your data.
         - Docker installation
         - Make installation (for Unix-based systems)
 
-    - For Unix-based systems (such as Linux).
-        - Open the terminal and use the following commands:
-            - make package 
-            - make run
+      - Github Repository Packages:
+          - Navigate to Github repository packages and pull the latest image of the container.
+          - Run the following command in the terminal:
+              - docker run -p 8080:8080 ghcr.io/mekhail-meiring/webworkflow:latest
 
-    - For other systems:
-        - Run the following gradle commands in the terminal:
-            - gradlew clean
-            - gradlew bootBuildImage
-            - docker run -p 8080:8080 docker.io/library/webworkflow:0.0.1-SNAPSHOT
+      - For Unix-based systems (such as Linux).
+          - Open the terminal and use the following commands:
+              - make package 
+              - make run
 
-    - Access the application by navigating to http://localhost:8080 in your web browser.
+      - For other systems:
+          - Run the following gradle commands in the terminal:
+              - gradlew clean
+              - gradlew bootBuildImage
+              - docker run -p 8080:8080 docker.io/library/webworkflow:0.0.1-SNAPSHOT
+
+      - Access the application by navigating to http://localhost:8080 in your web browser.
     
 
 ## Live Deployment:
