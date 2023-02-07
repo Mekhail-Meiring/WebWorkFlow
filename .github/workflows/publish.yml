@@ -1,7 +1,7 @@
 name: publish
 on: [push]
 jobs:
-  publish-hello-docker-image:
+  publish-webworkflow-docker-image:
     runs-on: ubuntu-latest
 
     steps:
