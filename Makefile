@@ -9,7 +9,7 @@ clean_build_app: # Cleans and builds the application
 
 build_container: ## Build the docker container for the application from dockerfile
 	@echo "Building image..."
-	sudo docker build -t com/webworkflow .
+	./gradlew bootBuildImage --imageName=com/webworkflow
 	@echo "Done."
 
 
@@ -20,7 +20,7 @@ package: ## Packages the project
 
 run: ## Run the application
 	@echo "Running..."
-	sudo docker run -d -p 8080:8080 com/webworkflow
+	sudo docker run -d -p 8080:8080 docker.io/com/webworkflow:latest
 	@echo "Done."
 
 

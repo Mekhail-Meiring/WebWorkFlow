@@ -29,7 +29,7 @@ jobs:
 
       - name: push to GitHub Package Registry
         run: |
-          docker tag com/webworkflow ghcr.io/mekhail-meiring/webworkflow:latest
+          docker docker.io/com/webworkflow:latest ghcr.io/mekhail-meiring/webworkflow:latest
           docker push ghcr.io/mekhail-meiring/webworkflow:latest
 
       - name: Login to Docker Hub
@@ -40,5 +40,16 @@ jobs:
 
       - name: push to Docker Hub
         run: |
-          docker tag com/webworkflow mekhail/webworkflow:latest
+          docker tag docker.io/com/webworkflow:latest mekhail/webworkflow:latest
           docker push mekhail/webworkflow:latest
+
+      - name: Get tag name
+        uses: olegtarasov/get-tag@v2
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_TOKEN }}
+
+      - name: Provision Droplet and deploy container
+        run: ioctl compute droplet create "$GIT_TAG_NAME" --image docker-18-04 --size s-1vcpu-1gb --region nyc1 --user-data-file deploy.sh --wait
