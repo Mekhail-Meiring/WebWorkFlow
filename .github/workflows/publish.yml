@@ -42,14 +42,3 @@ jobs:
         run: |
           docker tag docker.io/com/webworkflow:latest mekhail/webworkflow:latest
           docker push mekhail/webworkflow:latest
-
-      - name: Get tag name
-        uses: olegtarasov/get-tag@v2
-
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DIGITALOCEAN_TOKEN }}
-
-      - name: Provision Droplet and deploy container
-        run: ioctl compute droplet create "$GIT_TAG_NAME" --image docker-18-04 --size s-1vcpu-1gb --region nyc1 --user-data-file deploy.sh --wait
