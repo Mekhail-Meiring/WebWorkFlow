@@ -44,7 +44,7 @@ Once you completed either of the options below, open your web browser and naviga
     
 
 ## Live Deployment:
-A live deployment of WebWorkFlow is also available at https://web-workflow-wf5t8.ondigitalocean.app/
+A live deployment of WebWorkFlow is also available at https://webworkflow-swlhg.ondigitalocean.app/
 for easy access and demonstration.
 
 
