@@ -27,16 +27,18 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and package docker container on github
+      - name: push to GitHub Package Registry
         run: |
           docker tag com/webworkflow ghcr.io/mekhail-meiring/webworkflow:latest
           docker push ghcr.io/mekhail-meiring/webworkflow:latest
 
-      - name: Build and package docker container on dockerhub
+      - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: push to Docker Hub
         run: |
           docker tag com/webworkflow mekhail/webworkflow:latest
           docker push mekhail/webworkflow:latest
