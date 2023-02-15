@@ -22,6 +22,8 @@ presented with a graphical representation of your data.
 - Pre-requisites:
   - Docker installation
   - Make installation (for Unix-based systems)
+  - You also need an Excel file with the correct format (see Features section above)
+    - You can download the Excel file in (src/test/resources/excel/test.xlsx) to test the application
 
 
 Once you completed either of the options below, open your web browser and navigate to http://localhost:8080/
