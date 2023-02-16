@@ -48,7 +48,7 @@ Once you completed either of the options below, open your web browser and naviga
 ## Live Deployment:
 A live deployment of WebWorkFlow is also available at https://webworkflow-swlhg.ondigitalocean.app/
 for easy access and demonstration.
-You can download a file in the repository (src/test/resources/excel/test.xlsx) to test the application.
+- You can download a file in the repository (src/test/resources/excel/test.xlsx) to test the application.
 
 
 ## How to run tests:
